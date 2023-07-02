@@ -61,17 +61,11 @@ CREATE TABLE curtidas(
 -----------------------------------------------------
 
 --checando se os campos estao corretos
-select * from genero; -- OK
+select * from genero; -- OK 115
 select * from usuarios;
-select * from artistas; -- OK
-select * from musicas; -- OK
+select * from artistas; -- OK 250K
+select * from musicas; -- OK 700K
 select * from curtidas;
-
-INSERT INTO curtidas VALUES ('omega', 1, '11-06-2023', 120);
-INSERT INTO curtidas VALUES ('omega', 4, '11-06-2023', 50);
-INSERT INTO curtidas VALUES ('omega', 5, '11-06-2023', 600);
-INSERT INTO curtidas VALUES ('chopsticks', 3, '11-06-2023', 800);
-INSERT INTO curtidas VALUES ('chopsticks', 1, '11-06-2023', 1000);
 
 --consultas
 --As musicas pop mais ouvidas do usuario omega
