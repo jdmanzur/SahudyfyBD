@@ -7,8 +7,8 @@ DROP TABLE generos;
 
 -- funcoes legais
 SELECT pg_database_size('sahudify_definitivo');
-SELECT pg_size_pretty( pg_database_size('empresa'));
-SELECT pg_size_pretty(pg_total_relation_size('artistas'));
+SELECT pg_size_pretty( pg_database_size('sahudify_definitivo'));
+SELECT pg_size_pretty(pg_total_relation_size('curtidas'));
 
 --criacao das tabelas
 CREATE TABLE genero(
@@ -18,9 +18,9 @@ CREATE TABLE genero(
 );
 
 CREATE TABLE usuarios(
-	username varchar(100) NOT NULL,
-	nome varchar(50),
-	email varchar(50) NOT NULL,
+	username varchar(200) NOT NULL,
+	nome varchar(150),
+	email varchar(150) NOT NULL,
 	senha varchar(100) NOT NULL,
 	data_nascimento date NOT NULL,
 	PRIMARY KEY (username)
@@ -50,9 +50,9 @@ CREATE TABLE musicas(
 );
 
 CREATE TABLE curtidas(
-	username varchar(100) NOT NULL,
-	id_musica SERIAL NOT NULL,
-	data_curtida date,
+	username varchar(200) NOT NULL,
+	id_musica SERIAL NOT NULL, -- 1 : 500 000
+	data_curtida date, 
 	tempo_ouvido float,
 	PRIMARY KEY (username,id_musica),
 	FOREIGN KEY (username) REFERENCES usuarios(username),
@@ -62,33 +62,35 @@ CREATE TABLE curtidas(
 
 --checando se os campos estao corretos
 select * from genero; -- OK 115
-select * from usuarios;
-select * from artistas; -- OK 250K
-select * from musicas; -- OK 700K
-select * from curtidas;
+select * from usuarios; -- OK 250K
+select * from artistas; -- OK 50K
+select * from musicas; -- OK 500K
+select * from curtidas; -- OK 1M!!
 
 --consultas
---As musicas pop mais ouvidas do usuario omega
+--As musicas mambo mais ouvidas do usuario cybelda
 SELECT titulo, album, genero, duracao, data_lancamento, tempo_ouvido
 FROM curtidas NATURAL JOIN musicas
-WHERE genero = 'Pop' AND username = 'omega'
+WHERE genero = '72' AND username = 'cybelda'
 ORDER BY tempo_ouvido DESC;
 
---musicas da taylor que comecam com E
+SELECT username, COUNT(username) as Curtidas FROM curtidas GROUP BY username ORDER BY Curtidas DESC
+
+--musicas do Adam Sandler que comecam com T
 SELECT titulo, album, genero, duracao, data_lancamento 
 FROM artistas NATURAL JOIN musicas 
-WHERE nome = 'Taylor Swift'  AND titulo ILIKE 'E%';
+WHERE nome = 'Adam Sandler' AND titulo ILIKE 'T%';
 
 --ordena as mais curtidas dos que vao ter um show entre a data especificada
-SELECT titulo, album, genero, duracao, data_lancamento, curtidas_totais
+SELECT titulo, album, genero, duracao, data_lancamento, nome as nome_artista, data_prox_show, curtidas_totais
 FROM (
 SELECT *
 FROM musicas 
 NATURAL JOIN 
     (SELECT id_musica, COUNT(id_musica) AS curtidas_totais FROM curtidas GROUP BY id_musica) AS get_count
  NATURAL JOIN 
-(SELECT id_artista FROM artistas WHERE data_prox_show >= '01-01-2023' AND data_prox_show <= '01-01-2024') AS get_artista
+(SELECT id_artista, nome, data_prox_show FROM artistas WHERE data_prox_show >= '01-01-2025' AND data_prox_show <= '01-01-2028') AS get_artista
 -- ordena por curtidas totais
 ORDER BY curtidas_totais DESC) AS musicas_artistas
 -- limita em 25 musicas
-LIMIT 25;
+LIMIT 50;
