@@ -63,24 +63,24 @@ CREATE TABLE curtidas(
 --checando se os campos estao corretos
 select * from genero; -- OK 115
 select * from usuarios; -- OK 250K
-select * from artistas where nacionalidade = 'Brazil'; -- OK 50K
+select * from artistas; -- OK 50K
 select * from musicas; -- OK 500K
 select * from curtidas; -- OK 1M!!
 
 --consultas
---As musicas de hip hop mais ouvidas do usuario XLbignuts37
+--As musicas koreanas tradicionais mais ouvidas do usuario ----spike----
 SELECT titulo, album, genero, duracao, data_lancamento, tempo_ouvido
 FROM curtidas NATURAL JOIN musicas
-WHERE genero = '5' AND username = 'helpboy1239'
+WHERE genero = '99' AND username = '----spike----'
 ORDER BY tempo_ouvido DESC;
 
 --consulta pra ver os usuarios com mais curtidas
 SELECT username, COUNT(username) as Curtidas FROM curtidas GROUP BY username ORDER BY Curtidas DESC
 
---musicas do Gilberto Gil que comecam com T
+--musicas do Gilberto Gil que comecam com L
 SELECT titulo, album, genero, duracao, data_lancamento 
 FROM artistas NATURAL JOIN musicas 
-WHERE nome = 'Gilberto Gil' AND titulo ILIKE 'T%';
+WHERE nome = 'Ney Matogrosso' AND titulo ILIKE 'L%';
 
 --ordena as mais curtidas dos que vao ter um show entre a data especificada
 SELECT titulo, album, genero, duracao, data_lancamento, nome as nome_artista, data_prox_show, curtidas_totais
