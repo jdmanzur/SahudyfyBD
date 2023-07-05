@@ -13,22 +13,23 @@ Dentro da pasta populações, temos os scripts .sql de população das tabelas i
 Os arquivos criar_tabelas.sql e backup_banco.sql são os arquivos para restaurar o banco de dados criado.
 
 
-SBD_2023.1_G1_bruno_jade_vitor.zip/
-├─ scripts/
-│  ├─ generate_artists.py
-│  ├─ generate_musics.py
-│  ├─ generate_users.py
-│  ├─ generate_likes.py
-│
-├─ populacoes/
-│  ├─ generos.sql
-│  ├─ artistas.sql
-│  ├─ musicas.sql
-│  ├─ curtidas.sql
-│  ├─ usuarios.sql
-│
-├─ backup_banco.sql
-├─ criar_tabelas.sql
+SBD_2023.1_G1_bruno_jade_vitor.zip/ \
+├─ scripts/ \
+│  ├─ generate_artists.py \
+│  ├─ generate_musics.py \
+│  ├─ generate_users.py \
+│  ├─ generate_likes.py \
+│ \
+├─ populacoes/ \
+│  ├─ generos.sql \
+│  ├─ artistas.sql \
+│  ├─ musicas.sql \
+│  ├─ curtidas.sql \
+│  ├─ usuarios.sql \
+│ \
+├─ backup_banco.sql \
+├─ criar_tabelas.sql 
+
 
 
 ## Passo a Passo da Execução do Backup
