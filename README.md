@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 > Este trabalho foi realizado pelo Grupo 1:\
 Bruno Fritoli Carrazza - RA: 770993 \
 Jade Manzur de Almeida - RA: 771025 \
